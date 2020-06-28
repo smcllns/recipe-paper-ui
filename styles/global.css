@@ -1,3 +1,17 @@
 @tailwind base;
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+ol {
+  list-style-type: decimal;
+  margin-left: 2rem;
+}
+ul {
+  list-style-type: disc;
+  margin-left: 2rem;
+}
+
 @tailwind components;
 @tailwind utilities;
