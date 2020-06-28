@@ -12,14 +12,19 @@ export default ({ recipes }) => {
       </Head>
       <div className="px-2">
         <h1 className="text-2xl font-bold py-6">Recipes</h1>
-        <ol>
+        <div className="Recipes-Container flex">
           {recipes.map((r) => (
-            <li>
-              <Recipe r={r} />
-            </li>
+            <RecipeCard r={r} />
           ))}
-        </ol>
+        </div>
       </div>
+      <style jsx>
+        {`
+          .Recipes-Container {
+            flex: 1 1 50%;
+          }
+        `}
+      </style>
     </>
   );
 };
@@ -32,13 +37,25 @@ export async function getStaticProps(context) {
   };
 }
 
-const Recipe = ({ r }) => {
-  const editSrc = githubUrl + "/" + r.file;
-  const imgSrc = apiUrl + "/" + r.img;
+const RecipeCard = ({ r }) => {
   return (
-    <p>
-      {/* <img src={imgSrc} /> */}
-      <a href={editSrc}>{r.title}</a>
-    </p>
+    <div className="Recipe-Card flex flex-col">
+      <img src={apiUrl + r.img} />
+      <a href={apiUrl + r.file}>{r.title}</a>{" "}
+      <a href={githubUrl + r.file}>Edit</a>
+      <style jsx>{`
+        .Recipe-Card {
+          max-height: 300px;
+          max-width: 300px;
+          margin: 1%;
+          position: relative;
+        }
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      `}</style>
+    </div>
   );
 };
